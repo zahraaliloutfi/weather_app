@@ -1,3 +1,6 @@
+import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
+
 class WeatherModel {
   String date;
   String name;
@@ -40,4 +43,17 @@ class WeatherModel {
     return 'date =$date ,temp = $temp ,state =$weatherStateName,';
   }
 
+  // String? getImage(){
+  //   if(weatherStateName == 'Thunderstorm'){
+  //   return 'assets/img1.jpg';}
+  //   else {return 'assets/img1.jpg';}
+  // }
+
+
+  MaterialColor? getThemeColor(){
+    if(weatherStateName == 'Thunderstorm'){
+      return Colors.red;
+    }
+    else {return Colors.yellow;}
+  }
 }

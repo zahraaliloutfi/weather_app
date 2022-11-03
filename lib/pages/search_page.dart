@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/providers/weather_provider.dart';
 import 'package:weather_app/survices/weather_survices.dart';
 
 class SearchPage extends StatelessWidget {
   String? cityName;
   //عملت كونستركتر عشان اباصيلها الميثود
-  SearchPage({
-   this. updateUi
-  });
-
-  //عشان اخليها تقبل ميثود لاني هباصيلها ميثود
-  VoidCallback? updateUi;
+  // SearchPage({
+  //  this. updateUi
+  // });
+  //
+  // //عشان اخليها تقبل ميثود لاني هباصيلها ميثود
+  // VoidCallback? updateUi;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,12 @@ class SearchPage extends StatelessWidget {
               WeatherService service = WeatherService();
               WeatherModel weather =
                   await service.getWeather(cityName: cityName!);
-              weatherData = weather;
-              updateUi!();
+              //عشان اعمل اكسز علي الويزر ال في البروفايدر ال في المين
+              //بيديك اكسز علي الاوبجكت عشان تدخل علي ال فيه
+              Provider.of<WeatherProvider>(context , listen: false).weatherData =weather;
+              Provider.of<WeatherProvider>(context , listen: false).cityName =cityName;
+              // weatherData = weather;
+              // updateUi!();
               Navigator.pop(context);
             },
             keyboardAppearance: Brightness.light,
@@ -49,4 +55,4 @@ class SearchPage extends StatelessWidget {
 }
 
 //global variable كل الكلاسز شايفاه
-WeatherModel? weatherData;
+// WeatherModel? weatherData;
